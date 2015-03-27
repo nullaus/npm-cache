@@ -96,8 +96,9 @@ async function main() {
   }
 
   let pkgReqs = await request.get(url).end();
-  let pkg = JSON.parse(pkgReqs.text);
-  let pkgHash = hash(pkgReqs.text);
+  let pkg = JSON.parse(pkgReqs.text.trim());
+  let pkgHash = hash(pkgReqs.text.trim());
+  console.log('package file hash =', pkgHash);
   let namespace = `${args.namespace}.${signature()}.${pkgHash}`
 
   // Check to see if we already have this package json cached...

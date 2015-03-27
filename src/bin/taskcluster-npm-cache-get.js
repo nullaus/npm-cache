@@ -46,7 +46,8 @@ async function main() {
   let queue = new taskcluster.Queue();
 
   let pkgText = fs.readFileSync(args.package, 'utf8')
-  let pkgHash = hash(pkgText);
+  let pkgHash = hash(pkgText.trim());
+  console.log('package hash =', pkgHash);
   let namespace = `${args.namespace}.${signature()}.${pkgHash}`
 
   // Check to see if we already have this package json cached...
